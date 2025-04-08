@@ -21,4 +21,4 @@ threshold = 0.5
 adjacency_matrix = (correlation_matrix.abs() > threshold).astype(int)
 
 # Save adjacency matrix
-adjacency_matrix.to_csv("outputs/adjacency_matrix_threshold_0.5.csv")
+adjacency_matrix.to_csv("outputs/adjacency_matrix.csv")

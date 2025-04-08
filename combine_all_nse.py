@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # Set path to your directory of CSVs
-folder_path = "NSE/v1/"
+folder_path = "NSE_dataset"
 outpath = "outputs/all_stocks_closing_prices_2020.csv"
 # Create a date range for index
 date_range = pd.date_range(start="2020-01-01", end="2021-01-01", freq='D')
