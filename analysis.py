@@ -3,7 +3,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
-import powerlaw
 
 def create_graph(csv_file):
     adj_df = pd.read_csv(csv_file, index_col=0)
@@ -43,18 +42,7 @@ def plot_degree_dist(G):
     plt.xlabel("Degree")
     plt.ylabel("Frequency")
 
-    #Power-Law fitting
-    fit = powerlaw.Fit(degrees, discrete=True)
-    alpha = fit.alpha
-    xmin = fit.xmin
-    print(f"Estimated power-law exponent (alpha): {alpha:.4f}")
-    print(f"Estimated xmin: {xmin}")
-
-    # Overlay the fitted power-law (manually compute for bin centers ≥ xmin)
-    fit_degrees = bin_centers[bin_centers >= xmin]
-    fit_pdf = fit.power_law.pdf(fit_degrees)
-    fit.power_law.plot_pdf(color='red', linestyle='--', label=f'Power-law Fit\nα={fit.alpha:.2f}')
-    
+   
     # Plot histogram with log-log axes
     plt.figure(figsize=(8, 6))
     plt.bar(bin_centers, hist, width=np.diff(bin_edges), align='center', edgecolor='black', alpha=0.7, label="Log-binned Histogram")
