@@ -3,7 +3,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 from collections import Counter
-import powerlaw
 
 def create_graph(csv_file):
     adj_df = pd.read_csv(csv_file, index_col=0)
@@ -13,12 +12,6 @@ def create_graph(csv_file):
 
     return G
 
-csv_file_path = "outputs/adjacency_matrix.csv"  # Replace with your file
-
-G = create_graph(csv_file_path)
-
-print("Number of nodes = ", G.number_of_nodes())
-print("Number of edges = ", G.number_of_edges())
 
 def plot_degree_dist(G):
     # Compute degree for each node
@@ -43,17 +36,17 @@ def plot_degree_dist(G):
     plt.xlabel("Degree")
     plt.ylabel("Frequency")
 
-    #Power-Law fitting
-    fit = powerlaw.Fit(degrees, discrete=True)
-    alpha = fit.alpha
-    xmin = fit.xmin
-    print(f"Estimated power-law exponent (alpha): {alpha:.4f}")
-    print(f"Estimated xmin: {xmin}")
+    # #Power-Law fitting
+    # fit = powerlaw.Fit(degrees, discrete=True)
+    # alpha = fit.alpha
+    # xmin = fit.xmin
+    # print(f"Estimated power-law exponent (alpha): {alpha:.4f}")
+    # print(f"Estimated xmin: {xmin}")
 
-    # Overlay the fitted power-law (manually compute for bin centers ≥ xmin)
-    fit_degrees = bin_centers[bin_centers >= xmin]
-    fit_pdf = fit.power_law.pdf(fit_degrees)
-    fit.power_law.plot_pdf(color='red', linestyle='--', label=f'Power-law Fit\nα={fit.alpha:.2f}')
+    # # Overlay the fitted power-law (manually compute for bin centers ≥ xmin)
+    # fit_degrees = bin_centers[bin_centers >= xmin]
+    # fit_pdf = fit.power_law.pdf(fit_degrees)
+    # fit.power_law.plot_pdf(color='red', linestyle='--', label=f'Power-law Fit\nα={fit.alpha:.2f}')
     
     # Plot histogram with log-log axes
     plt.figure(figsize=(8, 6))
@@ -70,7 +63,15 @@ def plot_degree_dist(G):
     plt.tight_layout()
     plt.show()
 
-plot_degree_dist(G)
+if __name__== '__main__':
+    csv_file_path = "outputs/adjacency_matrix.csv"  # Replace with your file
+
+    G = create_graph(csv_file_path)
+
+    print("Number of nodes = ", G.number_of_nodes())
+    print("Number of edges = ", G.number_of_edges())
+
+    plot_degree_dist(G)
 
 
 
