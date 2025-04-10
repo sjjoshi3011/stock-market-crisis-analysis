@@ -17,7 +17,7 @@ np.fill_diagonal(correlation_matrix.values, 0)
 correlation_matrix.to_csv("outputs/correlation_matrix.csv")
 
 # Define threshold and build adjacency matrix
-threshold = 0.8
+threshold = 0.9
 adjacency_matrix = (correlation_matrix.abs() > threshold).astype(int)
 
 # Save adjacency matrix
