@@ -64,7 +64,7 @@ def plot_degree_dist(G):
     plt.show()
 
 if __name__== '__main__':
-    csv_file_path = "outputs/adjacency_matrix.csv"  # Replace with your file
+    csv_file_path = "outputs/adjacency_matrix_filtered.csv"  # Replace with your file
 
     G = create_graph(csv_file_path)
 

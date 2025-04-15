@@ -8,7 +8,7 @@ import numpy as np
 
 if __name__ == '__main__':
     # 1. Create or load a graph (for demo, we use a random graph)
-    csv_file_path = "outputs/adjacency_matrix.csv"
+    csv_file_path = "outputs/adjacency_matrix_filtered.csv"
     adj_df = pd.read_csv(csv_file_path, index_col=0)
     # Create a graph from the adjacency matrix
     G = nx.from_pandas_adjacency(adj_df)
