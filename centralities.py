@@ -11,8 +11,8 @@ def print_top(metric_name, top_list):
     for node, score in top_list:
         print(f"Node {node}: {score:.4f}")
 
-if __name__ == '__main__':
-    csv_file_path = "outputs/adjacency_matrix.csv"
+
+def print_centralities(csv_file_path):
     adj_df = pd.read_csv(csv_file_path, index_col=0)
     # Create a graph from the adjacency matrix
     G = nx.from_pandas_adjacency(adj_df)
@@ -44,5 +44,9 @@ if __name__ == '__main__':
     top_auths = sorted(hits_auth.items(), key=lambda x: x[1], reverse=True)[:10]
     print_top("HITS - Hub Scores", top_hubs)
     print_top("HITS - Authority Scores", top_auths)
+
+if __name__ == '__main__':
+    csv_file_path = "outputs/adjacency_matrix.csv"
+    print_centralities(csv_file_path)
 
 
