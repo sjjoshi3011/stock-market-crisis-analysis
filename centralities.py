@@ -2,14 +2,37 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-
-
-
 # Print results
 def print_top(metric_name, top_list):
     print(f"\nTop nodes by {metric_name}:")
     for node, score in top_list:
         print(f"Node {node}: {score:.4f}")
+
+
+def get_top_nodes_by_centrality(G):
+    top_nodes = {}
+
+    # Closeness
+    closeness = nx.closeness_centrality(G)
+    top_nodes['Closeness'] = sorted(closeness, key=closeness.get, reverse=True)[:3]
+
+    # Betweenness
+    betweenness = nx.betweenness_centrality(G)
+    top_nodes['Betweenness'] = sorted(betweenness, key=betweenness.get, reverse=True)[:3]
+
+    # Eigenvector
+    try:
+        eigen = nx.eigenvector_centrality(G, max_iter=1000)
+        top_nodes['Eigenvector'] = sorted(eigen, key=eigen.get, reverse=True)[:3]
+    except nx.PowerIterationFailedConvergence:
+        top_nodes['Eigenvector'] = ["Convergence failed"]
+
+    # HITS
+    hits_hubs, hits_authorities = nx.hits(G, max_iter=1000)
+    top_nodes['HITS_Hub'] = sorted(hits_hubs, key=hits_hubs.get, reverse=True)[:3]
+    top_nodes['HITS_Authority'] = sorted(hits_authorities, key=hits_authorities.get, reverse=True)[:3]
+
+    return top_nodes
 
 
 def print_centralities(csv_file_path):

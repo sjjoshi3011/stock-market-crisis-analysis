@@ -9,14 +9,17 @@ def create_graph_from_adjacency(csv_file):
     # Create a graph from the adjacency matrix
     G = nx.from_pandas_adjacency(adj_df)
     
+    return G
+
+def plot_graph(G):
     # Draw the graph
     plt.figure(figsize=(10, 10))
     nx.draw(G, with_labels=True, node_size=500, node_color='lightblue', edge_color='gray')
     plt.title('Graph from Adjacency Matrix')
     plt.show()
 
-
 if __name__ == '__main__':
     # Example usage
     csv_file_path = "outputs/adjacency_matrix_filtered.csv"  # Replace with your file
     create_graph_from_adjacency(csv_file_path)
+    plot_graph(G)
