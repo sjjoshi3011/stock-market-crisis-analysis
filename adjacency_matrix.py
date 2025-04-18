@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
 
-if __name__ == '__main__':
+
+def adjaceny_matrix(file_name):
+        
+    
     # Load cleaned stock data
-    df = pd.read_csv("outputs/all_stocks_closing_prices_2020_cleaned.csv")
+    df = pd.read_csv("outputs/" + file_name + ".csv")
 
     # Drop the 'Date' column for correlation calculations
     stock_data = df.drop(columns=['Date'])

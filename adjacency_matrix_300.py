@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 
-if __name__ == '__main__':
+def adjacency_filtered(file_name):
+
     # Load cleaned stock data
-    df = pd.read_csv("outputs/all_stocks_closing_prices_2020_cleaned.csv")
+    df = pd.read_csv("outputs/" + file_name + ".csv")
 
     # Load list of relevant stock symbols
     sector_df = pd.read_csv("outputs/combined_sectors.csv")
