@@ -9,7 +9,7 @@ from shockwave import build_graph_from_correlation_csv, simulate_shock_propagati
 
 
 
-def simulate_shocks_from_top_central_nodes(G, top_nodes):
+def simulate_shocks_from_top_central_nodes(G, top_nodes, initial_shock=-0.05, steps=4, decay=0.2):
 
     for centrality_type, nodes in top_nodes.items():
         if nodes == ["Convergence failed"]:
@@ -18,7 +18,18 @@ def simulate_shocks_from_top_central_nodes(G, top_nodes):
 
         for i, seed_node in enumerate(nodes, start=1):
             print(f"\n🚨 Simulating shock from top {i} {centrality_type} node: {seed_node}")
-            shocks = simulate_shock_propagation(G2, seed_node, initial_shock=-0.05, steps=4, decay=0.2)
+            shocks = simulate_shock_propagation(G, seed_node, initial_shock=initial_shock, steps=steps, decay=decay)
+            summarize_shock_effects(shocks)
+
+def simulate_shocks_from_bottom_central_nodes(G, bottom_nodes, initial_shock=-0.05, steps=4, decay=0.2):
+    for centrality_type, nodes in bottom_nodes.items():
+        if nodes == ["Convergence failed"]:
+            print(f"⚠️ Skipping {centrality_type} due to eigenvector convergence issue.")
+            continue
+
+        for i, seed_node in enumerate(nodes, start=1):
+            print(f"\n🌊 Simulating shock from bottom {i} {centrality_type} node: {seed_node}")
+            shocks = simulate_shock_propagation(G, seed_node, initial_shock=initial_shock, steps=steps, decay=decay)
             summarize_shock_effects(shocks)
 
 

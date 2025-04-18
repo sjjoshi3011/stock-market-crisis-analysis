@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-def adjaceny_matrix(file_name):
-        
+def build_adjaceny_matrix(file_name, threshold=0.9):
     
     # Load cleaned stock data
     df = pd.read_csv("outputs/" + file_name + ".csv")
@@ -18,11 +17,10 @@ def adjaceny_matrix(file_name):
     np.fill_diagonal(correlation_matrix.values, 0)
 
     # Save correlation matrix (optional)
-    correlation_matrix.to_csv("outputs/correlation_matrix.csv")
+    correlation_matrix.to_csv("corr/"+file_name+".csv")
 
     # Define threshold and build adjacency matrix
-    threshold = 0.9
     adjacency_matrix = (correlation_matrix.abs() > threshold).astype(int)
 
     # Save adjacency matrix
-    adjacency_matrix.to_csv("outputs/adjacency_matrix.csv")
+    adjacency_matrix.to_csv("adj/" + file_name + ".csv")

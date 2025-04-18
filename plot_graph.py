@@ -21,5 +21,5 @@ def plot_graph(G):
 if __name__ == '__main__':
     # Example usage
     csv_file_path = "outputs/adjacency_matrix_filtered.csv"  # Replace with your file
-    create_graph_from_adjacency(csv_file_path)
+    G = create_graph_from_adjacency(csv_file_path)
     plot_graph(G)

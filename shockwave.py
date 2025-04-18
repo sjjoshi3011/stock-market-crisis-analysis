@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import networkx as nx
 
-
 def build_graph_from_correlation_csv(csv_path, threshold=0.3):
     # Read CSV and convert to DataFrame
     df = pd.read_csv(csv_path, index_col=0)
@@ -21,7 +20,7 @@ def build_graph_from_correlation_csv(csv_path, threshold=0.3):
     
     return G
 
-def simulate_shock_propagation(G, seed_node, initial_shock=-0.05, steps=5, decay=0.5):
+def simulate_shock_propagation(G, seed_node, initial_shock=-0.05, steps=4, decay=0.5):
     shock = {node: 0.0 for node in G.nodes}
     shock[seed_node] = initial_shock
 

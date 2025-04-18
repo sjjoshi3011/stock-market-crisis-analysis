@@ -9,30 +9,55 @@ def print_top(metric_name, top_list):
         print(f"Node {node}: {score:.4f}")
 
 
-def get_top_nodes_by_centrality(G):
+def get_top_nodes_by_centrality(G,k=3):
     top_nodes = {}
 
     # Closeness
     closeness = nx.closeness_centrality(G)
-    top_nodes['Closeness'] = sorted(closeness, key=closeness.get, reverse=True)[:3]
+    top_nodes['Closeness'] = sorted(closeness, key=closeness.get, reverse=True)[:k]
 
     # Betweenness
     betweenness = nx.betweenness_centrality(G)
-    top_nodes['Betweenness'] = sorted(betweenness, key=betweenness.get, reverse=True)[:3]
+    top_nodes['Betweenness'] = sorted(betweenness, key=betweenness.get, reverse=True)[:k]
 
     # Eigenvector
     try:
         eigen = nx.eigenvector_centrality(G, max_iter=1000)
-        top_nodes['Eigenvector'] = sorted(eigen, key=eigen.get, reverse=True)[:3]
+        top_nodes['Eigenvector'] = sorted(eigen, key=eigen.get, reverse=True)[:k]
     except nx.PowerIterationFailedConvergence:
         top_nodes['Eigenvector'] = ["Convergence failed"]
 
     # HITS
     hits_hubs, hits_authorities = nx.hits(G, max_iter=1000)
-    top_nodes['HITS_Hub'] = sorted(hits_hubs, key=hits_hubs.get, reverse=True)[:3]
-    top_nodes['HITS_Authority'] = sorted(hits_authorities, key=hits_authorities.get, reverse=True)[:3]
+    top_nodes['HITS_Hub'] = sorted(hits_hubs, key=hits_hubs.get, reverse=True)[:k]
+    # top_nodes['HITS_Authority'] = sorted(hits_authorities, key=hits_authorities.get, reverse=True)[:k]
 
     return top_nodes
+
+def get_bottom_nodes_by_centrality(G,k=3):
+    bottom_nodes = {}
+
+    # Closeness
+    closeness = nx.closeness_centrality(G)
+    bottom_nodes['Closeness'] = sorted(closeness, key=closeness.get)[:k]
+
+    # Betweenness
+    betweenness = nx.betweenness_centrality(G)
+    bottom_nodes['Betweenness'] = sorted(betweenness, key=betweenness.get)[:k]
+
+    # Eigenvector
+    try:
+        eigen = nx.eigenvector_centrality(G, max_iter=1000)
+        bottom_nodes['Eigenvector'] = sorted(eigen, key=eigen.get)[:k]
+    except nx.PowerIterationFailedConvergence:
+        bottom_nodes['Eigenvector'] = ["Convergence failed"]
+
+    # HITS
+    hits_hubs, hits_authorities = nx.hits(G, max_iter=1000)
+    bottom_nodes['HITS_Hub'] = sorted(hits_hubs, key=hits_hubs.get)[:k]
+    # bottom_nodes['HITS_Authority'] = sorted(hits_authorities, key=hits_authorities.get)[:k]
+
+    return bottom_nodes
 
 
 def print_centralities(csv_file_path):
@@ -71,5 +96,3 @@ def print_centralities(csv_file_path):
 if __name__ == '__main__':
     csv_file_path = "outputs/adjacency_matrix.csv"
     print_centralities(csv_file_path)
-
-
