@@ -6,6 +6,12 @@ from collections import Counter
 import numpy as np
 
 
+def community_detection(G):
+    partition = community_louvain.best_partition(G)
+    modularity = community_louvain.modularity(partition, G)
+    num_communities = len(set(partition.values()))
+    return partition, modularity, num_communities
+
 if __name__ == '__main__':
     # 1. Create or load a graph (for demo, we use a random graph)
     csv_file_path = "outputs/adjacency_matrix_filtered.csv"
