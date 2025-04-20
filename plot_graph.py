@@ -33,7 +33,7 @@ def plot_mst_graph(G):
     # Draw graph using MST layout
     plt.figure(figsize=(14, 14))
     nx.draw_networkx_nodes(G, pos, node_size=node_sizes, node_color='skyblue', edgecolors='black')
-    nx.draw_networkx_edges(G, pos, edge_color='gray', alpha=0.6)
+    nx.draw_networkx_edges(G, pos, edge_color='gray', alpha=0.1)
     # nx.draw_networkx_labels(G, pos, font_size=8)
 
     plt.title('Graph Visualized with MST Layout (Node Size ~ Degree)', fontsize=14)
@@ -41,6 +41,10 @@ def plot_mst_graph(G):
     plt.show()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     csv_file_path = "adj/timeframe_2020_cleaned.csv"
+=======
+    csv_file_path = "adj/timeframe_2017_2019_cleaned.csv"
+>>>>>>> f84ee42dee4dd694e189892c258e5b16d8210046
     G = create_graph_from_adjacency(csv_file_path)
     plot_mst_graph(G)
