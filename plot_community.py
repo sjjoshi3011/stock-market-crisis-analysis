@@ -85,7 +85,7 @@ plt.show()
 
 # --- Plot 2: MST Layout ---
 plt.figure(figsize=(12, 8))
-nx.draw_networkx_edges(G_sub, mst_pos, alpha=0.3, width=0.5)
+nx.draw_networkx_edges(G_sub, mst_pos, alpha=0.2, width=0.3)
 nx.draw_networkx_nodes(G_sub, mst_pos, node_color=node_colors, node_size=80, alpha=0.95)
 plt.title(f"Louvain Communities (Top {N}) - MST-Based Layout")
 plt.axis('off')
